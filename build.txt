@@ -1,0 +1,3 @@
+displayName = Better Gore
+author = Toasty
+version = 0.1
