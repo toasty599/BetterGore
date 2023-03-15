@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using static BetterGore.Core.Particles.BloodManager;
@@ -49,7 +50,7 @@ namespace BetterGore.Core.Particles
 			if (!CollidingWithTiles())
 				Center += Velocity;
 
-			float fallSpeed = 0.15f * Utils.GetLerpValue(0f, 45f, Timer, true);
+			float fallSpeed = 0.15f * Utils.GetLerpValue(0f, 35f, Timer, true);
 			Velocity.Y += fallSpeed;
 
 			if (Timer <= FadeInTime)
@@ -62,6 +63,7 @@ namespace BetterGore.Core.Particles
 			OldPositions.Add(Center);
 
 			Rotation = Velocity.ToRotation();
+
 
 			Timer++;
         }
@@ -78,6 +80,6 @@ namespace BetterGore.Core.Particles
 			}
 		}
 
-		public bool CollidingWithTiles() => Collision.SolidTiles(Center, (int)Size.X, (int)Size.Y);
+		public bool CollidingWithTiles() => Collision.SolidTiles(Center, (int)Size.X, (int)Size.Y) || Collision.tile;
 	}
 }

@@ -40,20 +40,12 @@ namespace BetterGore.Core.Globals
             float minDistance = 50f;
             float distanceScalar = 2f - Utils.GetLerpValue(minDistance, maxDistance, distanceTravelled, true);
             int finalBloodAmount = (int)(amountToBleed * distanceScalar);
-            float speedScalar = Utils.GetLerpValue(2f, 27f, projectileSpeed, true);
-            float baseChanceToFlip = 9f;
-            // Kill me
-            float maxChance = baseChanceToFlip / Utils.Remap(distanceScalar, 0f, 2f, 0f, baseChanceToFlip);
-            //Main.NewText(baseChanceToFlip);
+            float speedScalar = Utils.GetLerpValue(0f, 28f, projectileSpeed, false);
             for (int i = 0; i < finalBloodAmount; i++)
             {
                 float rotation = Main.rand.NextFloat(-spurtAngle * 0.5f, spurtAngle * 0.5f);
-                float speed = Main.rand.NextFloat(0.3f, 0.5f) * projectileSpeed;
-                float baseRandom = Main.rand.NextFloat(maxChance);
-                float rounded = (float)decimal.Round((decimal)baseRandom, 1);
-                Main.NewText(rounded);
-                bool flip = rounded >= maxChance;
-                Vector2 velocity = directionToSplat.RotatedBy(rotation + (flip ? MathHelper.Pi : 0f)) * speed;
+                float speed = Main.rand.NextFloat(0.3f, 0.5f) * (projectileSpeed * (1f * speedScalar));
+                Vector2 velocity = directionToSplat.RotatedBy(rotation) * speed;
                 float sizeScalar = (1 + damageRatio) * 3 * Main.rand.NextFloat(0.005f, 0.010f) * bloodSize;
                 Vector2 size = new Vector2(Main.rand.NextFloat(0.3f, 1f), Main.rand.NextFloat(0.3f, 1f)) * sizeScalar;
                 BloodManager.SpawnParticle(spawnPosition, velocity, size);
