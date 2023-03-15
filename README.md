@@ -1,3 +1,3 @@
 # BetterGore
 
-A mod to make Terraria be more gorey.
+A mod to make Terraria be more gory.
